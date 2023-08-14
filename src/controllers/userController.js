@@ -5,8 +5,16 @@ const createUser = async (req, res) => {
     try {
         const payload = req.body
 
-        if (!payload.username || !payload.password) {
-            throw { status: 400, message: 'username and password are required.' }
+        if (!payload.username) {
+            throw { status: 400, message: 'username is required.' }
+        }
+
+        if (!payload.fullname) {
+            throw { status: 400, message: 'fullname is required.' }
+        }
+
+        if (!payload.password) {
+            throw { status: 400, message: 'password is required.' }
         }
 
         const user = await userService.getUserByUsername(payload.username)
