@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import config from './../config/env.js'
 import userService from './../services/userService.js'
 
-// Login
+// Just login
 const login = async (req, res) => {
     try {
         const payload = req.body
@@ -25,7 +25,7 @@ const login = async (req, res) => {
 
         const authToken = jwt.sign(user, config.secretKey)
         
-        // Retornar o token
+        // Return Token
         const data = { authToken }
         res.status(200).json({ success: true, data, messsage: 'Success to login' })
     }
