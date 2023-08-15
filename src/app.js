@@ -3,10 +3,12 @@ import config from './config/env.js'
 import cors from 'cors'
 import db from './db/connectDb.js'
 
+// Import routes
 import authRoutes from './routes/auth/index.js'
 import noAuthRoutes from './routes/noauth/index.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerDoc from './docs/swagger.json' assert { type: 'json' }
 
-// Import routes
 const app = express()
 
 // Config app
@@ -21,8 +23,13 @@ app.set('port', config.port)
 db.on('error', err => { console.error(`Connection error ${err}`)})
 db.once('open', () => console.log('Success to connect'))
 
-// Routes
+// App routes
 app.use('/auth', authRoutes)
 app.use('/noauth', noAuthRoutes)
+
+
+// Swagger documentantion
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc))
+
 
 export default app

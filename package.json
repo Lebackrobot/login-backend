@@ -26,7 +26,8 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.1",
     "nodejs": "^0.0.0",
-    "nvm": "^0.0.4"
+    "nvm": "^0.0.4",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",

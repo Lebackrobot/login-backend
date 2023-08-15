@@ -1,0 +1,64 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Login Backend",
+        "description": "Login endpoint documentation.",    
+        "contact": {
+            "email": "dr.pedrofernades@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:4000",
+            "description": "Login API"
+        }
+    ],
+    "paths": {
+        "/signin": {
+
+        },
+
+        "/signup": {
+            "post": {
+                "summary": "signup user", 
+                "description": "Essa rota é responsável por registrar um novo usuário.",
+                "tags": ["signup"],
+                "requestBody": {
+                    "description": "Signup user informations.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "fullname": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "required": ["fullname", "username", "password"]
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success to create user."
+                    },
+                    "400": {
+                        "description": "Invalid request."
+                    },
+                    "500": {
+                        "description": "Internal server error."
+                    }
+                }
+            }
+        }
+    }
+}
