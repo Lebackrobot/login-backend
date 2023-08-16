@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import userService from './../services/userService.js'
 import bcrypt from 'bcrypt'
 
@@ -30,8 +31,30 @@ const createUser = async (req, res) => {
     }
 
     catch (err) {
-        res.status(err.status || 500).json({ success: false, message: err.message || 'Internal server error. ' })
+        res.status(err.status || 500).json({ success: false, message: err.message || 'Internal server error.' })
     }
 }
 
-export default { createUser }
+const deleteUser = async (req, res) => {
+    try {
+        const  id = req.params.id
+
+
+        if (!id) {
+            throw { status: 404, message: 'User ID is required.' }
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw { status: 404, message: 'User not found' }
+        }
+
+         await userService.deleteUser(id)
+        res.status(204).json({ success: true, message: 'User deleted. '})
+    }
+
+    catch (err) {
+        res.status(err.status || 500).json({ success: false, message: err.message || 'Internal server error.' })
+    }
+}
+
+export default { createUser, deleteUser }

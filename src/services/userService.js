@@ -15,4 +15,9 @@ const createUser = async (obj) => {
 
 }
 
-export default { getUserByUsername, createUser }
+
+const deleteUser = async (id) => {
+    return userModel.deleteOne({ _id: id })
+}
+
+export default { getUserByUsername, createUser, deleteUser }
